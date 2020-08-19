@@ -1,0 +1,66 @@
+[GIN-debug] [WARNING] Creating an Engine instance with the Logger and Recovery middleware already attached.
+
+[GIN-debug] [WARNING] Running in "debug" mode. Switch to "release" mode in production.
+ - using env:	export GIN_MODE=release
+ - using code:	gin.SetMode(gin.ReleaseMode)
+
+[GIN-debug] GET    /img/*filepath            --> github.com/gin-gonic/gin.(*RouterGroup).createStaticHandler.func1 (3 handlers)
+[GIN-debug] HEAD   /img/*filepath            --> github.com/gin-gonic/gin.(*RouterGroup).createStaticHandler.func1 (3 handlers)
+[GIN-debug] GET    /                         --> src/controller.Index (5 handlers)
+[GIN-debug] GET    /restaurnt/list           --> src/controller.RestaurntList (5 handlers)
+[GIN-debug] POST   /restaurnt/add            --> src/controller.RestaurntAdd (5 handlers)
+[GIN-debug] POST   /restaurnt/edit           --> src/controller.RestaurntEdit (5 handlers)
+[GIN-debug] POST   /restaurnt/del            --> src/controller.RestaurntDel (5 handlers)
+2020/08/19 18:04:32 E:/GoWorkSpace/OpenKitchen/src/main/main.go:26: <nil>
+[GIN-debug] Listening and serving HTTP on :8080
+[GIN-debug] [WARNING] Creating an Engine instance with the Logger and Recovery middleware already attached.
+
+[GIN-debug] [WARNING] Running in "debug" mode. Switch to "release" mode in production.
+ - using env:	export GIN_MODE=release
+ - using code:	gin.SetMode(gin.ReleaseMode)
+
+[GIN-debug] GET    /img/*filepath            --> github.com/gin-gonic/gin.(*RouterGroup).createStaticHandler.func1 (3 handlers)
+[GIN-debug] HEAD   /img/*filepath            --> github.com/gin-gonic/gin.(*RouterGroup).createStaticHandler.func1 (3 handlers)
+[GIN-debug] GET    /                         --> src/controller.Index (5 handlers)
+[GIN-debug] GET    /restaurnt/list           --> src/controller.RestaurntList (5 handlers)
+[GIN-debug] POST   /restaurnt/add            --> src/controller.RestaurntAdd (5 handlers)
+[GIN-debug] POST   /restaurnt/edit           --> src/controller.RestaurntEdit (5 handlers)
+[GIN-debug] POST   /restaurnt/del            --> src/controller.RestaurntDel (5 handlers)
+2020/08/19 18:05:19 E:/GoWorkSpace/OpenKitchen/src/main/main.go:26: <nil>
+[GIN-debug] Listening and serving HTTP on :8080
+[GIN] 2020/08/19 - 18:05:49 | 200 |     23.9364ms |       127.0.0.1 | GET      "/restaurnt/list?offset=0&limit=100"
+[GIN] 2020/08/19 - 18:05:49 | 401 |            0s |       127.0.0.1 | GET      "/favicon.ico"
+[GIN-debug] [WARNING] Creating an Engine instance with the Logger and Recovery middleware already attached.
+
+[GIN-debug] [WARNING] Running in "debug" mode. Switch to "release" mode in production.
+ - using env:	export GIN_MODE=release
+ - using code:	gin.SetMode(gin.ReleaseMode)
+
+[GIN-debug] GET    /img/*filepath            --> github.com/gin-gonic/gin.(*RouterGroup).createStaticHandler.func1 (3 handlers)
+[GIN-debug] HEAD   /img/*filepath            --> github.com/gin-gonic/gin.(*RouterGroup).createStaticHandler.func1 (3 handlers)
+[GIN-debug] GET    /                         --> src/controller.Index (5 handlers)
+[GIN-debug] GET    /restaurnt/list           --> src/controller.RestaurntList (5 handlers)
+[GIN-debug] POST   /restaurnt/add            --> src/controller.RestaurntAdd (5 handlers)
+[GIN-debug] POST   /restaurnt/edit           --> src/controller.RestaurntEdit (5 handlers)
+[GIN-debug] POST   /restaurnt/del            --> src/controller.RestaurntDel (5 handlers)
+2020/08/19 18:07:44 E:/GoWorkSpace/OpenKitchen/src/main/main.go:26: <nil>
+[GIN-debug] Listening and serving HTTP on :8080
+2020/08/19 18:07:45 E:/GoWorkSpace/OpenKitchen/src/router/handler.go:14: runtime error: invalid memory address or nil pointer dereference
+[GIN] 2020/08/19 - 18:07:45 | 200 |     24.9331ms |       127.0.0.1 | GET      "/restaurnt/list?offset=0&limit=100"
+[GIN] 2020/08/19 - 18:07:45 | 401 |            0s |       127.0.0.1 | GET      "/favicon.ico"
+[GIN-debug] [WARNING] Creating an Engine instance with the Logger and Recovery middleware already attached.
+
+[GIN-debug] [WARNING] Running in "debug" mode. Switch to "release" mode in production.
+ - using env:	export GIN_MODE=release
+ - using code:	gin.SetMode(gin.ReleaseMode)
+
+[GIN-debug] GET    /img/*filepath            --> github.com/gin-gonic/gin.(*RouterGroup).createStaticHandler.func1 (3 handlers)
+[GIN-debug] HEAD   /img/*filepath            --> github.com/gin-gonic/gin.(*RouterGroup).createStaticHandler.func1 (3 handlers)
+[GIN-debug] GET    /                         --> src/controller.Index (5 handlers)
+[GIN-debug] GET    /restaurnt/list           --> src/controller.RestaurntList (5 handlers)
+[GIN-debug] POST   /restaurnt/add            --> src/controller.RestaurntAdd (5 handlers)
+[GIN-debug] POST   /restaurnt/edit           --> src/controller.RestaurntEdit (5 handlers)
+[GIN-debug] POST   /restaurnt/del            --> src/controller.RestaurntDel (5 handlers)
+[GIN-debug] Listening and serving HTTP on :8080
+[GIN] 2020/08/19 - 18:09:06 | 200 |    115.7129ms |       127.0.0.1 | GET      "/restaurnt/list?offset=0&limit=100"
+[GIN] 2020/08/19 - 18:09:06 | 401 |            0s |       127.0.0.1 | GET      "/favicon.ico"

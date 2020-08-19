@@ -1,0 +1,38 @@
+package conf
+
+// 用户账号状态
+const (
+	USER_STATUS_DELETE = 0
+	USER_STATUS_NORMAL = 1
+	USER_STATUS_LOCK   = 2
+)
+
+// 区域信息状态
+const (
+	AREA_STATUS_DELETE = 0
+	AREA_STATUS_NORMAL = 1
+)
+
+// 组织
+const (
+	ORG_STATUS_DELETE = 0
+	ORG_STATUS_NORMAL = 1
+)
+
+// 设备
+const (
+	DEVICE_STATUS_DELETE = 0
+	DEVICE_STATUS_NORMAL = 1
+)
+
+// 设备类型
+const (
+	DEVICE_TYPE_STATUS_DELETE = 0
+	DEVICE_TYPE_STATUS_NORMAL = 1
+)
+
+// 截图
+const (
+	SCREENSHOT_STATUS_DELETE = 0
+	SCREENSHOT_STATUS_NORMAL = 1
+)
