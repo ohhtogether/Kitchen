@@ -3,9 +3,9 @@ module src
 go 1.15
 
 require (
-	github.com/360EntSecGroup-Skylar/excelize v1.4.1
 	github.com/bwmarrin/snowflake v0.3.0
 	github.com/dgrijalva/jwt-go v3.2.0+incompatible
+	github.com/dxvgef/filter v1.8.1
 	github.com/gin-gonic/gin v1.6.3
 	github.com/go-ini/ini v1.60.0
 	github.com/go-redis/redis v6.15.9+incompatible

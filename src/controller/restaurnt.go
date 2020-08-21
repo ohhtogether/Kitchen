@@ -1,11 +1,14 @@
 package controller
 
 import (
-	"fmt"
-	"github.com/gin-gonic/gin"
+	"errors"
+	"log"
 	"net/http"
 	"src/model"
 	"strconv"
+	"time"
+
+	"github.com/gin-gonic/gin"
 )
 
 //餐厅列表
@@ -34,8 +37,6 @@ func RestaurntList(c *gin.Context) {
 		c.JSON(http.StatusOK, &respData)
 		return
 	}
-	fmt.Println(err)
-	fmt.Println(data)
 	// 获取数据总数
 	num, err := rest.Total()
 	if err != nil {
@@ -59,8 +60,36 @@ func RestaurntList(c *gin.Context) {
 //添加一条餐厅信息
 func RestaurntAdd(c *gin.Context) {
 	var respData RespData
+	//接受数据
+	name := c.PostForm("name")
+	phone := c.PostForm("phone")
+	longitude := c.PostForm("longitude")
+	latitude := c.PostForm("latitude")
+	address := c.PostForm("address")
 
-	respData.Data = "添加一条餐厅信息"
+	//验证提交的参数非空
+	if len(name) < 1 || len(name) > 128 || len(phone) < 1 || len(phone) > 16 || len(address) > 128 || longitude == "" || latitude == "" {
+		respData.Error = "提交参数长度出错"
+		c.JSON(http.StatusBadRequest, &respData)
+		return
+	}
+
+	var rest model.Restaurnt
+	rest.Name = name
+	rest.Address = address
+	rest.Latitude = latitude
+	rest.Longitude = longitude
+	rest.Phone = phone
+	rest.Time = time.Now().Unix()
+	rest.Status = 1
+	//开始添加数据
+	err := rest.Add()
+	if err != nil {
+		respData.Error = "添加数据失败"
+		c.JSON(http.StatusBadRequest, &respData)
+		return
+	}
+	respData.Data = "添加一条餐厅信息成功"
 	c.JSON(http.StatusOK, &respData)
 	return
 }
@@ -69,7 +98,49 @@ func RestaurntAdd(c *gin.Context) {
 func RestaurntEdit(c *gin.Context) {
 	var respData RespData
 
-	respData.Data = "修改一条餐厅信息"
+	//接受数据
+	id := c.PostForm("id")
+	name := c.PostForm("name")
+	phone := c.PostForm("phone")
+	longitude := c.PostForm("longitude")
+	latitude := c.PostForm("latitude")
+	address := c.PostForm("address")
+
+	//验证提交的参数
+	rid, err := strconv.ParseInt(id, 10, 64)
+
+	if len(name) < 1 || len(name) > 128 || len(phone) < 1 || len(phone) > 16 || len(address) > 128 || longitude == "" || latitude == "" || err != nil || rid <= 0 {
+		respData.Error = "提交参数出错"
+		c.JSON(http.StatusBadRequest, &respData)
+		return
+	}
+
+	var rest model.Restaurnt
+	rest.Id = rid
+	rest.Name = name
+	rest.Address = address
+	rest.Latitude = latitude
+	rest.Longitude = longitude
+	rest.Phone = phone
+	rest.Time = time.Now().Unix()
+
+	//判断是否有需修改的餐厅的记录
+	one, err := rest.One()
+	if err != nil {
+		respData.Error = "没有此餐厅的信息"
+		c.JSON(http.StatusBadRequest, &respData)
+		return
+	}
+	rest.Status = one.Status
+	//将需要修改的数据修改入数据库
+	err = rest.Edit()
+	if err != nil {
+		respData.Data = "修改餐厅信息失败"
+		c.JSON(http.StatusBadRequest, &respData)
+		return
+	}
+	//返回
+	respData.Data = "修改餐厅信息成功"
 	c.JSON(http.StatusOK, &respData)
 	return
 }
@@ -77,8 +148,54 @@ func RestaurntEdit(c *gin.Context) {
 //删除一条餐厅信息
 func RestaurntDel(c *gin.Context) {
 	var respData RespData
+	//接受数据
+	id := c.PostForm("id")
 
-	respData.Data = "删除一条餐厅信息"
+	//验证提交的参数
+	rid, err := strconv.ParseInt(id, 10, 64)
+	if err != nil || rid <= 0 {
+		respData.Error = "提交参数出错"
+		c.JSON(http.StatusBadRequest, &respData)
+		return
+	}
+
+	var rest model.Restaurnt
+	rest.Id = rid
+	//判断是否有需修改的餐厅的记录
+	one, err := rest.One()
+	if err != nil {
+		respData.Error = "没有此餐厅的信息"
+		c.JSON(http.StatusBadRequest, &respData)
+		return
+	}
+	//将其状态改为删除
+	one.Status = 0
+	//将需要修改的数据修改入数据库
+	err = one.Edit()
+	if err != nil {
+		respData.Data = "删除餐厅信息失败"
+		c.JSON(http.StatusBadRequest, &respData)
+		return
+	}
+	//返回
+	respData.Data = "删除餐厅信息成功"
 	c.JSON(http.StatusOK, &respData)
+	return
+}
+
+// id对name
+func RestMap() (restMap map[int64]string, err error) {
+	var rest model.Restaurnt
+	all, err := rest.All()
+	if err != nil {
+		log.Println(err)
+		err = errors.New("获取餐厅数据失败")
+		return
+	}
+
+	restMap = make(map[int64]string)
+	for _, v := range all {
+		restMap[v.Id] = v.Name
+	}
 	return
 }

@@ -1,7 +1,6 @@
 package model
 
 import (
-	"fmt"
 	"src/global"
 )
 
@@ -21,7 +20,7 @@ type Restaurnt struct {
 	// Address 密码
 	Address string `json:"address"`
 	// Status 状态
-	Status string `json:"status"`
+	Status int64 `json:"status"`
 }
 
 // 获取所有数据
@@ -32,7 +31,11 @@ func (self Restaurnt) All() (data []Restaurnt, err error) {
 
 // 分页获取数据
 func (self Restaurnt) Page(offset, limit int64) (data []Restaurnt, err error) {
-	err = global.Dbs.Table("restaurnt").Where("status = ?", 1).Order("id DESC").Offset(offset).Limit(limit).Find(&data).Error
+	if offset == 0 || limit == 0 {
+		err = global.Dbs.Table("restaurnt").Where("status = ?", 1).Order("id DESC").Find(&data).Error
+	} else {
+		err = global.Dbs.Table("restaurnt").Where("status = ?", 1).Order("id DESC").Offset(offset).Limit(limit).Find(&data).Error
+	}
 	return
 }
 
@@ -54,25 +57,7 @@ func (self Restaurnt) Edit() (err error) {
 	return
 }
 
-func (self Restaurnt) Test() (data []Restaurnt, err error) {
-	var sql string = "select `name` from `restaurnt`"
-
-	rows, err := global.Db.Query(sql)
-	defer rows.Close()
-	if err != nil {
-		fmt.Println(sql)
-		fmt.Println(err)
-		return
-	}
-	var tmp Restaurnt
-	for rows.Next() {
-		err = rows.Scan(&tmp.Name)
-		if err != nil {
-			fmt.Println(err)
-			return
-		}
-		data = append(data, tmp)
-	}
-
+func (self Restaurnt) One() (user Restaurnt, err error) {
+	err = global.Dbs.Table("restaurnt").Where("status = ?", 1).First(&user, self.Id).Error
 	return
 }
